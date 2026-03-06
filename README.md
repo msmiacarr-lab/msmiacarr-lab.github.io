@@ -796,7 +796,7 @@
   <div class="hero-right">
     <div class="hero-card">
       <p>"She built us a real foundation — financial systems, governance, donor infrastructure. What we had before was duct tape. What she left us was an organization."</p>
-      <div class="hero-card-attr">— Nonprofit Executive</div>
+      <div class="hero-card-attr">— One Happy Exe</div>
       <div class="hero-stats">
         <div>
           <span class="stat-num">10+</span>
