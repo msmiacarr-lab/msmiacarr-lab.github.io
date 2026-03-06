@@ -1,1 +1,1104 @@
-# fuzzy-tribble
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soft Power Works — Nonprofit Operations Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f4ede0;
+      --cream-light: #faf6ef;
+      --green-deep: #1c3a28;
+      --green-mid: #2d5c3e;
+      --green-soft: #4a7c5f;
+      --terracotta: #b85c38;
+      --terracotta-light: #d4795a;
+      --ink: #1a1a18;
+      --ink-soft: #3d3d38;
+      --border: rgba(28,58,40,0.15);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream-light);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(244,237,224,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--terracotta); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav ul a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--terracotta); }
+
+    .nav-cta {
+      background: var(--green-deep) !important;
+      color: var(--cream) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      letter-spacing: 0.06em !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--green-mid) !important; color: var(--cream) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 5rem;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,92,56,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 6rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--green-deep);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--ink-soft);
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn-primary {
+      background: var(--green-deep);
+      color: var(--cream);
+      padding: 0.85rem 2rem;
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      border-radius: 2px;
+    }
+
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--green-deep);
+      padding: 0.85rem 2rem;
+      border: 1.5px solid var(--green-deep);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+
+    .btn-secondary:hover { background: var(--green-deep); color: var(--cream); }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 4rem 4rem 2rem;
+      position: relative;
+    }
+
+    .hero-card {
+      background: var(--green-deep);
+      color: var(--cream);
+      padding: 3rem 2.5rem;
+      max-width: 360px;
+      width: 100%;
+      border-radius: 4px;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.9s 1s forwards;
+    }
+
+    .hero-card::before {
+      content: '"';
+      font-family: var(--serif);
+      font-size: 7rem;
+      color: var(--terracotta);
+      opacity: 0.35;
+      position: absolute;
+      top: -1.5rem;
+      left: 1.5rem;
+      line-height: 1;
+    }
+
+    .hero-card p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .hero-card-attr {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(244,237,224,0.15);
+    }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--terracotta-light);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* MARQUEE */
+    .marquee-strip {
+      background: var(--green-deep);
+      padding: 0.9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-inner span {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.7;
+      padding: 0 2.5rem;
+    }
+
+    .marquee-inner span.dot {
+      color: var(--terracotta-light);
+      opacity: 1;
+      padding: 0 0.5rem;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* SECTIONS */
+    section { padding: 7rem 0; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--terracotta); }
+
+    /* ABOUT */
+    .about { background: var(--cream-light); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p strong {
+      font-weight: 500;
+      color: var(--green-deep);
+    }
+
+    .about-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .value-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 4px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .value-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(28,58,40,0.08); }
+
+    .value-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .value-card h4 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: 0.4rem;
+    }
+
+    .value-card p {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* SERVICES */
+    .services { background: var(--green-deep); }
+
+    .services .section-label { color: var(--terracotta-light); }
+    .services .section-title { color: var(--cream); }
+
+    .services-intro {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(244,237,224,0.75);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 4rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: rgba(244,237,224,0.06);
+      border: 1px solid rgba(244,237,224,0.12);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--terracotta);
+      transition: width 0.3s;
+    }
+
+    .service-card:hover {
+      background: rgba(244,237,224,0.1);
+      border-color: rgba(244,237,224,0.2);
+      transform: translateY(-4px);
+    }
+
+    .service-card:hover::after { width: 100%; }
+
+    .service-tier {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta-light);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .service-card p {
+      font-size: 0.92rem;
+      color: rgba(244,237,224,0.65);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-price {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--cream);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-price span {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(244,237,224,0.5);
+      margin-left: 0.25rem;
+    }
+
+    .service-list { list-style: none; padding: 0; }
+
+    .service-list li {
+      font-size: 0.85rem;
+      color: rgba(244,237,224,0.6);
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .service-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--terracotta-light);
+      font-size: 0.75rem;
+    }
+
+    /* WORK */
+    .work { background: var(--cream); }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .work-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem;
+      background: var(--cream-light);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .work-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(28,58,40,0.09); }
+
+    .work-org {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.75rem;
+    }
+
+    .work-card h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: 0.75rem;
+    }
+
+    .work-card p {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .work-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(28,58,40,0.07);
+      color: var(--green-mid);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--cream-light); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+
+    .quote-mark {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      line-height: 0.8;
+      color: var(--terracotta);
+      opacity: 0.35;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-card p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.98rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .testimonial-attr {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--green-deep);
+    }
+
+    .testimonial-attr span {
+      display: block;
+      font-weight: 300;
+      color: var(--ink-soft);
+      opacity: 0.7;
+    }
+
+    /* CONTACT */
+    .contact { background: var(--cream); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-left h2 em { font-style: italic; color: var(--terracotta); }
+
+    .contact-left p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .contact-details { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    .contact-detail-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--green-deep);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      color: var(--cream);
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      background: var(--cream-light);
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      padding: 0.75rem 1rem;
+      color: var(--ink);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--green-mid); }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .form-submit {
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      align-self: flex-start;
+    }
+
+    .form-submit:hover { background: var(--terracotta-light); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--green-deep);
+      color: var(--cream);
+      padding: 3rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .footer-logo span { color: var(--terracotta-light); }
+
+    .footer-copy { font-size: 0.8rem; opacity: 0.5; }
+
+    .footer-links { display: flex; gap: 2rem; }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: rgba(244,237,224,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--terracotta-light); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 6rem 2rem 3rem; }
+      .hero-right { padding: 0 2rem 4rem; }
+      .hero-card { max-width: 100%; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .work-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 4rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Soft Power<span>.</span>Works</a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">Nonprofit Operations Consulting</span>
+    <h1>Operations that hold<br/><em>the mission</em><br/>steady.</h1>
+    <p class="hero-sub">
+      I help mission-driven organizations build the operational infrastructure they need to do the work they actually came to do — without burning out their people or losing their way.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">See How I Work</a>
+      <a href="#contact" class="btn-secondary">Start a Conversation</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <p>"She built us a real foundation — financial systems, governance, donor infrastructure. What we had before was duct tape. What she left us was an organization."</p>
+      <div class="hero-card-attr">— Nonprofit Executive</div>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-num">10+</span>
+          <span class="stat-label">Years in ops leadership</span>
+        </div>
+        <div>
+          <span class="stat-num">$1.9M+</span>
+          <span class="stat-label">Federal grants managed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Governance Design</span><span class="dot">✦</span>
+    <span>Financial Systems</span><span class="dot">✦</span>
+    <span>CRM &amp; Data Infrastructure</span><span class="dot">✦</span>
+    <span>Grants Management</span><span class="dot">✦</span>
+    <span>Team Operations</span><span class="dot">✦</span>
+    <span>Strategic Advisory</span><span class="dot">✦</span>
+    <span>Workflow Design</span><span class="dot">✦</span>
+    <span>Change Management</span><span class="dot">✦</span>
+    <span>Governance Design</span><span class="dot">✦</span>
+    <span>Financial Systems</span><span class="dot">✦</span>
+    <span>CRM &amp; Data Infrastructure</span><span class="dot">✦</span>
+    <span>Grants Management</span><span class="dot">✦</span>
+    <span>Team Operations</span><span class="dot">✦</span>
+    <span>Strategic Advisory</span><span class="dot">✦</span>
+    <span>Workflow Design</span><span class="dot">✦</span>
+    <span>Change Management</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-label">About</span>
+        <h2 class="section-title">Good operations are<br/><em>a form of care.</em></h2>
+        <p>I'm Mia Carr — a nonprofit operations consultant with over a decade of experience building the systems that let organizations focus on the people they serve, not the chaos behind the scenes.</p>
+        <p>My background spans <strong>political organizing, membership management, federal grants compliance, and full organizational buildouts from scratch</strong>. I've run operations for political consulting firms, built CRM and fundraising infrastructure for growing nonprofits, and led multi-program flagship initiatives at a national LGBTQ+ advocacy organization.</p>
+        <p>I've worked in rooms that were underfunded, overstretched, and unclear on how they'd survive the next quarter — and I've helped turn those rooms into places people are proud to work.</p>
+        <a href="#contact" class="btn-primary" style="margin-top:1.25rem;display:inline-block;">Work with me</a>
+      </div>
+      <div>
+        <div class="about-values">
+          <div class="value-card">
+            <span class="value-icon">⚙️</span>
+            <h4>Systems thinking</h4>
+            <p>I see the whole picture — and design fixes that don't break three other things.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">🤝</span>
+            <h4>Mission alignment</h4>
+            <p>Operations should serve your values, not just your budget spreadsheet.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">📊</span>
+            <h4>Real infrastructure</h4>
+            <p>Not workarounds. Sustainable, documented systems your team can actually use.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">🔊</span>
+            <h4>Direct communication</h4>
+            <p>You'll always know where we stand and what comes next. No vague deliverables.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <span class="section-label">Services</span>
+    <h2 class="section-title">Three ways to<br/><em>work together.</em></h2>
+    <p class="services-intro">Every engagement is scoped around your actual situation — not a one-size template. Here's where we typically start.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-tier">Tier 01</span>
+        <h3>Operational Reset</h3>
+        <p>A deep-dive audit and rebuild of your core operational infrastructure. Right for orgs that have grown past their current systems — or never built real ones to begin with.</p>
+        <div class="service-price">From $7,500 <span>project-based</span></div>
+        <ul class="service-list">
+          <li>Operational &amp; financial systems audit</li>
+          <li>Governance and compliance review</li>
+          <li>CRM and data infrastructure build</li>
+          <li>Staff workflow redesign</li>
+          <li>Full documentation package</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <span class="service-tier">Tier 02</span>
+        <h3>Workflow &amp; Process Design</h3>
+        <p>Targeted process work for specific pain points — onboarding, grants management, financial reporting, donor tracking, or team coordination systems.</p>
+        <div class="service-price">From $5,000 <span>project-based</span></div>
+        <ul class="service-list">
+          <li>Process mapping and redesign</li>
+          <li>Tool selection and setup</li>
+          <li>SOP documentation</li>
+          <li>Staff training</li>
+          <li>30-day check-in</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <span class="service-tier">Tier 03</span>
+        <h3>Strategic Advisory</h3>
+        <p>Ongoing fractional operations support for leaders who need a trusted thinking partner without adding a full-time hire. Flexible retainer structure.</p>
+        <div class="service-price">From $3,000 <span>/ month</span></div>
+        <ul class="service-list">
+          <li>Weekly or biweekly strategy sessions</li>
+          <li>On-call ops consultation</li>
+          <li>Vendor and tool management</li>
+          <li>Project and team oversight</li>
+          <li>Board meeting prep support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="container">
+    <span class="section-label">Selected Work</span>
+    <h2 class="section-title">What this<br/><em>looks like in practice.</em></h2>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-org">Founding Engagement · Nonprofit Foundation</div>
+        <h3>Building an organization from a blank page</h3>
+        <p>Joined as Founding Executive Director at a newly-formed foundation focused on mentorship and financial empowerment for young adults. Built the full operational infrastructure from scratch: budget systems, governance frameworks, donor management, CRM integration, a digital fundraising campaign, and an alumni outreach model.</p>
+        <div class="work-tags">
+          <span class="tag">Governance</span>
+          <span class="tag">Fundraising Infrastructure</span>
+          <span class="tag">CRM Build</span>
+          <span class="tag">Financial Systems</span>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-org">Federal Grants Compliance · Conservation Sector</div>
+        <h3>$1.9M federal grant management and compliance</h3>
+        <p>Led compliance and program operations for a $1.9M federal grant through the Forest Service, including reporting, budget tracking, subcontractor coordination, and regulatory documentation. Zero compliance findings across the contract period.</p>
+        <div class="work-tags">
+          <span class="tag">Federal Compliance</span>
+          <span class="tag">Budget Oversight</span>
+          <span class="tag">Grant Reporting</span>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-org">National LGBTQ+ Advocacy Organization</div>
+        <h3>Cross-functional operations across 175+ stakeholders</h3>
+        <p>As Engagement Director, managed three flagship leadership programs and served as operational hub across Development, Political, and Communications teams. Coordinated a 175+ member campaign board and built reporting infrastructure that spanned multiple departments.</p>
+        <div class="work-tags">
+          <span class="tag">Stakeholder Management</span>
+          <span class="tag">Program Operations</span>
+          <span class="tag">Cross-functional Coordination</span>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-org">Political Consulting Firm</div>
+        <h3>30% increase in client service capacity</h3>
+        <p>As Director of Operations at a political consulting firm, restructured internal operations and client delivery workflows that drove a 30% increase in service capacity without adding headcount. Managed campaign analytics, voter targeting systems, and data infrastructure.</p>
+        <div class="work-tags">
+          <span class="tag">Operations Redesign</span>
+          <span class="tag">Data Systems</span>
+          <span class="tag">Capacity Building</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container">
+    <span class="section-label">Testimonials</span>
+    <h2 class="section-title">In their<br/><em>own words.</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p>Mia doesn't just fix problems — she builds the systems that prevent them. She came in when we were completely overwhelmed and left us with real infrastructure and a team that knew how to use it.</p>
+        <div class="testimonial-attr">
+          Nonprofit Leader
+          <span>Organizational Operations</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p>What stood out was how clearly she understood our mission alongside our operational gaps. She never lost sight of the people we serve while building the systems we needed to serve them better.</p>
+        <div class="testimonial-attr">
+          Executive Director
+          <span>Community-Focused Nonprofit</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p>Honest, direct, and genuinely strategic. Mia tells you what you actually need to hear, not what's comfortable. That's rare in a consultant — and it's exactly what we needed.</p>
+        <div class="testimonial-attr">
+          Senior Director
+          <span>Advocacy Organization</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <span class="section-label">Get in Touch</span>
+        <h2>Ready to build something that <em>actually works?</em></h2>
+        <p>Whether you're navigating a messy transition, building from scratch, or just need a thinking partner who understands operations and mission — let's talk about what you're working with.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉</div>
+            <span>admin@softpowerworks.org</span>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <span>Bowie, MD · Remote &amp; Mid-Atlantic</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" placeholder="Full name" required />
+            </div>
+            <div class="form-group">
+              <label for="org">Organization</label>
+              <input type="text" id="org" placeholder="Org name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@organization.org" required />
+          </div>
+          <div class="form-group">
+            <label for="service">What are you looking for?</label>
+            <select id="service">
+              <option value="">Select a service...</option>
+              <option>Operational Reset</option>
+              <option>Workflow &amp; Process Design</option>
+              <option>Strategic Advisory Retainer</option>
+              <option>Not sure yet — let's talk</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell me about your situation</label>
+            <textarea id="message" placeholder="What's going on? What's not working? What does success look like?"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+          <div id="form-confirm" style="display:none; font-size:0.9rem; color:var(--green-mid); font-weight:500; margin-top:0.5rem;">
+            Message sent! I'll be in touch within 2 business days.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">Soft Power<span>.</span>Works</div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 Soft Power Works. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-confirm').style.display = 'block';
+    e.target.reset();
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.work-card, .service-card, .testimonial-card, .value-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
